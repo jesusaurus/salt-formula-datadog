@@ -15,17 +15,21 @@
 #
 
 datadog:
-{% if grains['os_family'] == 'Debian' %}
+{% if pillar.get('use_remote_repo', false) %}
+    {% if grains['os_family'] == 'Debian' %}
   pkgrepo.managed:
     - name: deb http://apt.datadoghq.com/ unstable main
     - file: /etc/apt/sources.list.d/datadog.list
     - keyserver: keyserver.ubuntu.com
     - keyid: C7A7DA52
+    {% endif %}
 {% endif %}
   pkg.latest:
     - name: datadog-agent
+{% if pillar.get('use_remote_repo', false) %}
     - require:
       - pkgrepo: datadog
+{% endif %}
   service.running:
     - enabled: True
     - name: datadog-agent
