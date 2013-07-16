@@ -24,10 +24,14 @@ datadog:
     - keyid: C7A7DA52
     {% endif %}
 {% endif %}
+
+  pkg.latest:
+    - name: python-openssl
+
   pkg.latest:
     - name: datadog-agent
+
 {% if pillar.get('use_remote_repo', false) %}
-    - require:
       - pkgrepo: datadog
 {% endif %}
   service.running:
@@ -60,10 +64,6 @@ python-redis:
     - require_in:
       - service: datadog
 {% endif %}
-
-/etc/dd-agent/datadog.conf.example:
-  file.managed:
-    - source: salt://datadog/datadog.conf.example
 
 /etc/dd-agent/datadog.conf:
   file.managed:
