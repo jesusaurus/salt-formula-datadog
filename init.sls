@@ -25,13 +25,13 @@ datadog:
     {% endif %}
 {% endif %}
 
-  pkg.latest:
+  pkg.installed:
     - name: python-openssl
 
-  pkg.latest:
+  pkg.installed:
     - name: datadog-agent
-
 {% if pillar.get('use_remote_repo', false) %}
+    - require:
       - pkgrepo: datadog
 {% endif %}
   service.running:
