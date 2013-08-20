@@ -65,6 +65,15 @@ python-redis:
       - service: datadog
 {% endif %}
 
+{% if 'dbhead0003' in grains['host'] %}
+/etc/dd/agent/conf.d/mysql.yaml:
+  file.managed:
+    - source: salt://datadog/mysql.yaml
+    - template: jinja
+    - require_in:
+      - service: datadog
+{% endif %}
+
 /etc/dd-agent/datadog.conf:
   file.managed:
     - template: jinja
