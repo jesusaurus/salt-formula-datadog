@@ -35,7 +35,7 @@ datadog:
       - pkgrepo: datadog
 {% endif %}
   service.running:
-    - enabled: True
+    - enable: True
     - name: datadog-agent
     - require:
       - pkg: datadog
