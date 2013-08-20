@@ -57,7 +57,7 @@ python-redis:
 {% endif %}
 
 {% if pillar.get('elasticsearch', false) %}
-/etc/dd/agent/conf.d/elastic.yaml:
+/etc/dd-agent/conf.d/elastic.yaml:
   file.managed:
     - source: salt://datadog/elastic.yaml
     - template: jinja
@@ -66,7 +66,7 @@ python-redis:
 {% endif %}
 
 {% if 'dbhead0003' in grains['host'] %}
-/etc/dd/agent/conf.d/mysql.yaml:
+/etc/dd-agent/conf.d/mysql.yaml:
   file.managed:
     - source: salt://datadog/mysql.yaml
     - template: jinja
