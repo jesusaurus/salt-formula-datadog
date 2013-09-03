@@ -72,6 +72,12 @@ python-redis:
     - template: jinja
     - require_in:
       - service: datadog
+
+mysql_check_link:
+  file.symlink:
+    - target: //usr/share/datadog/agent/checks.d/mysql.py
+    - name: /etc/dd-agent/checks.d/mysql.py
+
 {% endif %}
 
 /etc/dd-agent/datadog.conf:
