@@ -75,8 +75,10 @@ python-redis:
 
 mysql_check_link:
   file.symlink:
-    - target: //usr/share/datadog/agent/checks.d/mysql.py
+    - target: /usr/share/datadog/agent/checks.d/mysql.py
     - name: /etc/dd-agent/checks.d/mysql.py
+    - require:
+      - pkg.installed: datadog-agent
 
 {% endif %}
 
