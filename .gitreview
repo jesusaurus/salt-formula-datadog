@@ -1,5 +1,5 @@
 [gerrit]
 host=gerrit.paas.hpcloud.net
 port=29418
-project=paas-core/salt-openstack/datadog
+project=paas-share/salt/datadog-formula
 defaultbranch=master

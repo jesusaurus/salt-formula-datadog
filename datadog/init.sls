@@ -34,6 +34,7 @@ datadog:
     - require:
       - pkgrepo: datadog
 {% endif %}
+
   service.running:
     - enable: True
     - name: datadog-agent
@@ -41,46 +42,6 @@ datadog:
       - pkg: datadog
     - watch:
       - file: /etc/dd-agent/datadog.conf
-
-{% if pillar.get('redis', false) %}
-python-redis:
-  pkg.latest:
-    - require-in:
-      - service: datadog
-
-/etc/dd/agent/conf.d/redisdb.yaml:
-  file.managed:
-    - source: salt://datadog/redisdb.yaml
-    - template: jinja
-    - require_in:
-      - service: datadog
-{% endif %}
-
-{% if pillar.get('elasticsearch', false) %}
-/etc/dd-agent/conf.d/elastic.yaml:
-  file.managed:
-    - source: salt://datadog/elastic.yaml
-    - template: jinja
-    - require_in:
-      - service: datadog
-{% endif %}
-
-{% if 'dbhead0003' in grains['host'] %}
-/etc/dd-agent/conf.d/mysql.yaml:
-  file.managed:
-    - source: salt://datadog/mysql.yaml
-    - template: jinja
-    - require_in:
-      - service: datadog
-
-mysql_check_link:
-  file.symlink:
-    - target: /usr/share/datadog/agent/checks.d/mysql.py
-    - name: /etc/dd-agent/checks.d/mysql.py
-    - require:
-      - pkg.installed: datadog-agent
-
-{% endif %}
 
 /etc/dd-agent/datadog.conf:
   file.managed:

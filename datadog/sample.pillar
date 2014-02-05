@@ -1,0 +1,6 @@
+datadog:
+  api_key: mykey1234
+
+datadog_tags:
+  - saltminion
+  - staging

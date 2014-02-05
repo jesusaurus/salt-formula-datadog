@@ -1,0 +1,6 @@
+init_config:
+
+instances:
+   -   rabbitmq_api_url: http://localhost:15672/api/
+       rabbitmq_user: {{ salt['pillar.get']('rabbit_admin_user', 'guest') }}
+       rabbitmq_pass: {{ salt['pillar.get']('rabbit_admin_password', 'guest') }}
