@@ -26,9 +26,6 @@ datadog:
 {% endif %}
 
   pkg.installed:
-    - name: python-openssl
-
-  pkg.installed:
     - name: datadog-agent
 {% if pillar.get('use_remote_repo', false) %}
     - require:
